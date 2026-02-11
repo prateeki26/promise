@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Promise Meant to Last</title>
+    <style>
+        :root {
+            --bg-dark: #1b0a1a;
+            --bg-gradient: linear-gradient(180deg, #2d0b2b 0%, #1b0a1a 100%);
+            --btn-gold: #f3e5ab;
+            --text-white: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            height: 100vh;
+            background: var(--bg-gradient);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-white);
+            text-align: center; overflow: hidden;
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 10px; font-style: italic; }
+        p { font-size: 1.1rem; color: #b3a2b2; margin-bottom: 30px; }
+        #instruction { color: #ff85a1; height: 20px; font-size: 0.9rem; }
+
+        .btn-container { position: relative; width: 100%; max-width: 300px; height: 150px; }
+
+        button {
+            padding: 15px 60px; font-size: 1.2rem;
+            border-radius: 30px; border: none; cursor: pointer;
+            position: absolute; left: 50%; transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn { background-color: var(--btn-gold); top: 0; z-index: 2; color: #333; font-weight: bold; }
+        #noBtn { background-color: rgba(255, 255, 255, 0.1); border: 1px solid white; color: white; top: 70px; }
+
+        /* Final Reveal Style */
+        #finalContent { display: none; padding: 20px; }
+        .promise-body { font-size: 1.2rem; line-height: 1.6; color: #ffccd5; }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1 id="main-title">Will you make a promise with me?</h1>
+        <p>A promise meant to last...</p>
+        <div id="instruction"></div>
+        
+        <div class="btn-container">
+            <button id="yesBtn" onclick="revealPromise()">YES 🤍</button>
+            <button id="noBtn" onmouseover="moveButton()">no</button>
+        </div>
+    </div>
+
+    <div id="finalContent">
+        <h1>"This promise changes everything..."</h1>
+        <div class="promise-body">
+            <p>To choose you even on the days we don't understand each other.</p>
+            <p>To stay when things get heavy.</p>
+            <p>I promise patience, honesty, and effort.</p>
+            <p><strong>Happy Promise Day!</strong></p>
+        </div>
+    </div>
+
+    <script>
+        const prompts = [
+            "This isn't a joke...",
+            "I'm serious about you...",
+            "Please don't ignore this...",
+            "You really gonna say no? 🥺"
+        ];
+        let promptIndex = 0;
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const instruction = document.getElementById('instruction');
+            
+            // Move the button to a random position
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            // Update text prompts from the video
+            if (promptIndex < prompts.length) {
+                instruction.innerText = prompts[promptIndex];
+                promptIndex++;
+            }
+        }
+
+        function revealPromise() {
+            document.getElementById('game-container').style.display = 'none';
+            const final = document.getElementById('finalContent');
+            final.style.display = 'block';
+            // Trigger confetti or music here if desired
+        }
+    </script>
+</body>
+</html>
